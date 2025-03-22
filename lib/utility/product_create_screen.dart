@@ -18,7 +18,25 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
         centerTitle: true,
       ),
 
+    body: Padding(padding: EdgeInsets.all(10),child: Column(
+    children: [
+      TextFormField(decoration: InputDecoration(
+    ),),
+    SizedBox(height: 10,),
+    TextFormField(decoration: InputDecoration(
+    ),),
+    SizedBox(height: 10,),
+    TextFormField(decoration: InputDecoration(
+    ),),
+    SizedBox(height: 10,),
+    TextFormField(decoration: InputDecoration(
+    ),),
+    SizedBox(height: 10,),
+    TextFormField(decoration: InputDecoration(
+    ),),
 
-    );
+
+    ],
+    )));
   }
 }
