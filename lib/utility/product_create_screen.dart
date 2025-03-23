@@ -1,3 +1,4 @@
+import 'package:crud_api_project/style/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,20 +21,15 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
 
     body: Padding(padding: EdgeInsets.all(10),child: Column(
     children: [
-      TextFormField(decoration: InputDecoration(
-    ),),
+    TextFormField(decoration: inputDecoratorStyle("productname")),
     SizedBox(height: 10,),
-    TextFormField(decoration: InputDecoration(
-    ),),
+    TextFormField(decoration: inputDecoratorStyle("productcode")),
     SizedBox(height: 10,),
-    TextFormField(decoration: InputDecoration(
-    ),),
+    TextFormField(decoration: inputDecoratorStyle("productimage")),
     SizedBox(height: 10,),
-    TextFormField(decoration: InputDecoration(
-    ),),
+    TextFormField(decoration: inputDecoratorStyle("unitprice")),
     SizedBox(height: 10,),
-    TextFormField(decoration: InputDecoration(
-    ),),
+    TextFormField(decoration: inputDecoratorStyle("totalprice")),
 
 
     ],
