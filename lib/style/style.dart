@@ -24,8 +24,3 @@ DecoratedBox decoratedBoxStyle(child){
   ),child: child,);
 }
 
-ButtonStyle buttonStyle(){
-  return ButtonStyle(
-    backgroundColor: Colors.blue
-  );
-}
