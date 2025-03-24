@@ -15,3 +15,17 @@ InputDecoration inputDecoratorStyle (label){
     fillColor: Colors.white
   );
 }
+
+DecoratedBox decoratedBoxStyle(child){
+  return DecoratedBox(decoration: BoxDecoration(
+    color: Colors.white,
+    border: Border.all(color: Colors.white),
+
+  ),child: child,);
+}
+
+ButtonStyle buttonStyle(){
+  return ButtonStyle(
+    backgroundColor: Colors.blue
+  );
+}
