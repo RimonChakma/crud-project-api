@@ -1,22 +1,24 @@
 
-import 'package:crud_api/utility/product_create_screen.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart 'as http ;
 
+  Future<bool>ProductCreateRquest(formValues)async{
+  final uri = Uri.parse("https://crud.teamrabbil.com/api/v1/CreateProduct");
+  final body = jsonEncode(formValues);
+  final header = {"Content-Type":"application/json"};
 
+  final response = await http.post(uri,body: body,headers: header);
+  final data = response.statusCode;
+  final result = jsonDecode(response.body);
 
-void main(){
-  runApp(const MyApp());
-}
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  if(data == 200 && result ["status"]=='success'){
+    print("success is ok");
+    return true;
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProductViewScreen(),
-    );
+  }else{
+    print("call is error");
+    return false;
   }
-}
 
+}
 

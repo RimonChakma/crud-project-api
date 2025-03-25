@@ -1,3 +1,4 @@
+import 'package:crud_api_project/api/api.dart';
 import 'package:crud_api_project/style/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -122,9 +123,9 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
             )),
       ],)),
 
-      ElevatedButton(onPressed: (){
+      ElevatedButton(onPressed: ()async{
         if(formState.currentState!.validate()){
-          print("success login");
+          await ProductCreateRquest(formValues);
         }
       }, child: Text("submit") ,)
     ],
