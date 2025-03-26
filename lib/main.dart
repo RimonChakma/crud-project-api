@@ -1,4 +1,5 @@
 import 'package:crud_api_project/utility/product_create_screen.dart';
+import 'package:crud_api_project/utility/product_gridview_screen.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProductViewScreen(),
+      home: ProductGridviewScreen(),
     );
   }
 }

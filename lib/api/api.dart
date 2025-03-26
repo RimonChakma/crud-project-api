@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart 'as http ;
 
   Future<bool>ProductCreateRquest(formValues)async{
@@ -19,6 +20,28 @@ import 'package:http/http.dart 'as http ;
     print("call is error");
     return false;
   }
-
 }
 
+Future<List>ProductGridViewRequest()async{
+    final uri = Uri.parse("https://crud.teamrabbil.com/api/v1/ReadProduct");
+    final header = {"Content-Type":"application/json"};
+    final response = await http.get(uri,headers: header);
+    final resultCode = response.statusCode;
+    final result = jsonDecode(response.body);
+
+    if(resultCode == 200 && result["status"]=="success"){
+      print("get process ok");
+      return result ["data"];
+    }else{
+      print("error");
+      return [];
+    }
+}
+
+SliverGridDelegateWithFixedCrossAxisCount gridViewStyle(){
+    return SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10
+    );
+}
