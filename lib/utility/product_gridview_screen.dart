@@ -25,8 +25,9 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
    setState(() {
      loading = true;
    });
-    final item = await ProductGridViewRequest();
+    final data = await ProductGridViewRequest();
     setState(() {
+      productItem = data;
       loading = false;
     });
   }
@@ -37,13 +38,39 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("List Product"),),
       body: loading == true?Center(child: CircularProgressIndicator(),):
-      GridView.builder(gridDelegate: gridViewStyle(), itemBuilder:(context, index) {
+      GridView.builder(gridDelegate: gridViewStyle(),
+        itemCount: productItem.length,
+        itemBuilder:(context, index) {
         return Card(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.network(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQod5zKjaQfyDf7lLX072p4k_v5QbMZkKBPgg&s",
-                 height: 200,width: 200,
+             Expanded(
+               child: Image.network(
+               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQod5zKjaQfyDf7lLX072p4k_v5QbMZkKBPgg&s",
+
+                 fit: BoxFit.cover,
+                            ),
+             ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(productItem[index]["ProductName"]),
+                      Text(productItem[index]["TotalPrice"]),
+                      SizedBox(height: 5,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                       OutlinedButton(onPressed: (){}, child: Icon(CupertinoIcons.ellipsis_vertical_circle)),
+                        OutlinedButton(onPressed: (){}, child: Icon(CupertinoIcons.delete)),
+
+                      ],)
+                    ],
+                  ),
+                ),
               )
             ],
           ),
