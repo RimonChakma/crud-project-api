@@ -25,6 +25,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
   }
 
   final formState = GlobalKey<FormState>();
+  bool loading = false;
 
 
   @override
@@ -35,100 +36,107 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
         centerTitle: true,
       ),
 
-    body: Padding(padding: EdgeInsets.all(10),child: Column(
-    children: [
+    body: loading?Center(child: CircularProgressIndicator(),):Padding(padding: EdgeInsets.all(10),child: Column(
+      children: [
 
-      Form(
-          key: formState,
-          child: Column(children: [
-        TextFormField(
-            validator: (value) {
-              if(value!.isEmpty){
-                return "please enter your productName";
-              }
-            },
-            onChanged: (textValue) {
-              inputOnChange("ProductName",textValue);
-            },
-            decoration: inputDecoratorStyle("ProductName")),
+        Form(
+            key: formState,
+            child: Column(children: [
+              TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "please enter your productName";
+                    }
+                  },
+                  onChanged: (textValue) {
+                    inputOnChange("ProductName",textValue);
+                  },
+                  decoration: inputDecoratorStyle("ProductName")),
 
-        SizedBox(height: 10,),
-        TextFormField(
-            validator: (value) {
-              if(value!.isEmpty){
-                return "please enter your productCode";
-              }return null;
-            },
-            onChanged: (textValue) {
-              inputOnChange("ProductCode",textValue);
-            },
-            decoration: inputDecoratorStyle("ProductCode")),
+              SizedBox(height: 10,),
+              TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "please enter your productCode";
+                    }return null;
+                  },
+                  onChanged: (textValue) {
+                    inputOnChange("ProductCode",textValue);
+                  },
+                  decoration: inputDecoratorStyle("ProductCode")),
 
-        SizedBox(height: 10,),
-        TextFormField(
-            validator: (value) {
-              if(value!.isEmpty){
-                return "please enter your productImg";
-              }return null;
-            },
-            onChanged: (textValue) {
-              inputOnChange("Img",textValue);
-            },
-            decoration: inputDecoratorStyle("ProductImage")),
+              SizedBox(height: 10,),
+              TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "please enter your productImg";
+                    }return null;
+                  },
+                  onChanged: (textValue) {
+                    inputOnChange("Img",textValue);
+                  },
+                  decoration: inputDecoratorStyle("ProductImage")),
 
-        SizedBox(height: 10,),
-        TextFormField(
-            validator: (value) {
-              if(value!.isEmpty){
-                return "please enter your totalPrice";
-              }return null;
-            },
-            onChanged: (textValue) {
-              inputOnChange("TotalPrice",textValue);
-            },
-            decoration: inputDecoratorStyle("TotalPrice")),
+              SizedBox(height: 10,),
+              TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "please enter your totalPrice";
+                    }return null;
+                  },
+                  onChanged: (textValue) {
+                    inputOnChange("TotalPrice",textValue);
+                  },
+                  decoration: inputDecoratorStyle("TotalPrice")),
 
-        SizedBox(height: 10,),
-        TextFormField(
-            validator: (value) {
-              if(value!.isEmpty){
-                return "please enter your unitPrice";
-              }return null;
-            },
-            onChanged: (textValue) {
-              inputOnChange("UnitPrice",textValue);
-            },
-            decoration: inputDecoratorStyle("UnitPrice")),
+              SizedBox(height: 10,),
+              TextFormField(
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "please enter your unitPrice";
+                    }return null;
+                  },
+                  onChanged: (textValue) {
+                    inputOnChange("UnitPrice",textValue);
+                  },
+                  decoration: inputDecoratorStyle("UnitPrice")),
 
-        SizedBox(height: 10,),
+              SizedBox(height: 10,),
 
-        decoratedBoxStyle(
-            DropdownButtonFormField(
-              validator: (value) {
-                if(value!.isEmpty){
-                  return "qty is required";
-                }return null;
-              },
-              value: formValues["Qty"],
-              items: [
-              DropdownMenuItem(child: Text("select item"),value: "",),
-              DropdownMenuItem(child: Text("1st"),value: "1st",),
-              DropdownMenuItem(child: Text("2nd"),value: "2nd",),
-              DropdownMenuItem(child: Text("3rd"),value: "3rd",),
-              DropdownMenuItem(child: Text("4th"),value: "4th",),
-            ], onChanged: (textValue) {
-              inputOnChange('Qty', textValue);
-            },
-              isExpanded: true,
-            )),
-      ],)),
+              decoratedBoxStyle(
+                  DropdownButtonFormField(
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "qty is required";
+                      }return null;
+                    },
+                    value: formValues["Qty"],
+                    items: [
+                      DropdownMenuItem(child: Text("select item"),value: "",),
+                      DropdownMenuItem(child: Text("1st"),value: "1st",),
+                      DropdownMenuItem(child: Text("2nd"),value: "2nd",),
+                      DropdownMenuItem(child: Text("3rd"),value: "3rd",),
+                      DropdownMenuItem(child: Text("4th"),value: "4th",),
+                    ], onChanged: (textValue) {
+                    inputOnChange('Qty', textValue);
+                  },
+                    isExpanded: true,
+                  )),
+            ],)),
 
-      ElevatedButton(onPressed: ()async{
-        if(formState.currentState!.validate()){
-          await ProductCreateRquest(formValues);
-        }
-      }, child: Text("submit") ,)
-    ],
-    )));
+        ElevatedButton(onPressed: ()async{
+          if(formState.currentState!.validate()){
+            setState(() {
+              loading =true;
+            });
+            await ProductCreateRquest(formValues);
+            setState(() {
+              loading = false;
+            });
+          }
+        }, child: Text("submit") ,)
+      ],
+    ))
+    );
   }
 }
