@@ -38,6 +38,22 @@ Future<List>ProductGridViewRequest()async{
     }
 }
 
+Future<bool>ProductDeleteRequest(id)async{
+  final uri = Uri.parse("https://crud.teamrabbil.com/api/v1/DeleteProduct/"+id);
+  final header = {"Content-Type":"application/json"};
+  final response = await http.get(uri,headers: header);
+  final resultCode = response.statusCode;
+  final result = jsonDecode(response.body);
+
+  if(resultCode == 200 && result["status"]=="success"){
+    print("delete is ok");
+    return true;
+  }else{
+    print("error");
+    return false;
+  }
+}
+
 SliverGridDelegateWithFixedCrossAxisCount gridViewStyle(){
     return SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,

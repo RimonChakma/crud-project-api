@@ -32,6 +32,21 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
     });
   }
 
+  deleteButton(id)async{
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text('delete!'),
+        content: Text("once can get delete"),
+        actions: [
+          OutlinedButton(onPressed: (){
+            Navigator.pop(context);
+          }, child: Icon(Icons.close)),
+          OutlinedButton(onPressed: (){}, child: Icon(Icons.check))
+        ],
+      );
+    },);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +82,9 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 OutlinedButton(onPressed: (){}, child: Icon(CupertinoIcons.ellipsis_vertical_circle)),
-                                OutlinedButton(onPressed: (){}, child: Icon(CupertinoIcons.delete)),
+                                OutlinedButton(onPressed: (){
+                                  deleteButton(productItem[index][ "_id"]);
+                                }, child: Icon(CupertinoIcons.delete)),
 
                               ],)
                           ],
@@ -77,7 +94,7 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
                   ],
                 ),
               );
-            }, ),,
+            }, ),
           )
     );
   }
