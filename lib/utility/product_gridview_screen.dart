@@ -41,7 +41,15 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
           OutlinedButton(onPressed: (){
             Navigator.pop(context);
           }, child: Icon(Icons.close)),
-          OutlinedButton(onPressed: (){}, child: Icon(Icons.check))
+          OutlinedButton(onPressed: ()async{
+             Navigator.pop(context);
+             setState(() {
+               loading = true;
+             });
+             await ProductDeleteRequest(id);
+             getData();
+
+          }, child: Icon(Icons.check))
         ],
       );
     },);
