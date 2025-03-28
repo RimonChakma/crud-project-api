@@ -1,5 +1,6 @@
 import 'package:crud_api_project/api/api.dart';
 import 'package:crud_api_project/style/style.dart';
+import 'package:crud_api_project/utility/product_gridview_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -158,9 +159,9 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
                   loading =true;
                 });
                 await ProductUpdateRquest(formValues, widget.productItem["_id"]);
-                setState(() {
-                  loading = false;
-                });
+                Navigator.pushAndRemoveUntil(context,
+                    MaterialPageRoute(builder: (context) => ProductGridviewScreen(),)
+                    , (Route route) => false,);
               }
             }, child: Text("submit") ,)
           ],

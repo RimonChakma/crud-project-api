@@ -55,7 +55,7 @@ Future<bool>ProductDeleteRequest(id)async{
 }
 
 Future<bool>ProductUpdateRquest(formValues ,id)async{
-  final uri = Uri.parse("https://crud.teamrabbil.com/api/v1/UpdateProduct"+id);
+  final uri = Uri.parse("https://crud.teamrabbil.com/api/v1/UpdateProduct/"+id);
   final body = jsonEncode(formValues);
   final header = {"Content-Type":"application/json"};
 
