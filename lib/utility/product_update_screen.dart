@@ -157,7 +157,7 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
                 setState(() {
                   loading =true;
                 });
-                await ProductCreateRquest(formValues);
+                await ProductUpdateRquest(formValues, widget.productItem["_id"]);
                 setState(() {
                   loading = false;
                 });
