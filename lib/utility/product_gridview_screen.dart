@@ -1,3 +1,5 @@
+import 'package:crud_api_project/utility/product_create_screen.dart';
+import 'package:crud_api_project/utility/product_update_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -89,7 +91,9 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                OutlinedButton(onPressed: (){}, child: Icon(CupertinoIcons.ellipsis_vertical_circle)),
+                                OutlinedButton(onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductUpdateScreen(),));
+                                }, child: Icon(CupertinoIcons.ellipsis_vertical_circle)),
                                 OutlinedButton(onPressed: (){
                                   deleteButton(productItem[index][ "_id"]);
                                 }, child: Icon(CupertinoIcons.delete)),
@@ -103,7 +107,10 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
                 ),
               );
             }, ),
-          )
+          ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductViewScreen(),));
+      },child: Icon(Icons.add),),
     );
   }
 }
