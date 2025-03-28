@@ -92,7 +92,7 @@ class _ProductGridviewScreenState extends State<ProductGridviewScreen> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 OutlinedButton(onPressed: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductUpdateScreen(),));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductUpdateScreen(productItem[index]),));
                                 }, child: Icon(CupertinoIcons.ellipsis_vertical_circle)),
                                 OutlinedButton(onPressed: (){
                                   deleteButton(productItem[index][ "_id"]);

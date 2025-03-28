@@ -4,13 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductUpdateScreen extends StatefulWidget {
-  const ProductUpdateScreen({super.key});
+  final productItem;
+  const ProductUpdateScreen(this.productItem, {super.key});
 
   @override
   State<ProductUpdateScreen> createState() => _ProductUpdateScreenState();
 }
 
 class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
+
+
 
 
 
@@ -26,6 +29,23 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
 
   final formState = GlobalKey<FormState>();
   bool loading = false;
+  
+  @override
+  void initState() {
+    setState(() {
+      formValues.update("ProductName", (value)=>widget.productItem["ProductName"]);
+      formValues.update("ProductCode", (value)=>widget.productItem["ProductCode"]);
+      formValues.update("Img", (value)=>widget.productItem["Img"]);
+      formValues.update("TotalPrice", (value)=>widget.productItem["TotalPrice"]);
+      formValues.update("UnitPrice", (value)=>widget.productItem["UnitPrice"]);
+    });
+    super.initState();
+  }
+  
+  updateProduct(MapKey,TextValue){
+    formValues.update(MapKey, (value)=>TextValue);
+  }
+
 
 
 
@@ -45,6 +65,7 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
                 key: formState,
                 child: Column(children: [
                   TextFormField(
+
                       validator: (value) {
                         if(value!.isEmpty){
                           return "please enter your productName";
@@ -53,10 +74,12 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
                       onChanged: (textValue) {
                         inputOnChange("ProductName",textValue);
                       },
+                      initialValue: formValues["ProductName"],
                       decoration: inputDecoratorStyle("ProductName")),
 
                   SizedBox(height: 10,),
                   TextFormField(
+                    initialValue: formValues["ProductCode"],
                       validator: (value) {
                         if(value!.isEmpty){
                           return "please enter your productCode";
@@ -69,6 +92,7 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
 
                   SizedBox(height: 10,),
                   TextFormField(
+                      initialValue: formValues["Img"],
                       validator: (value) {
                         if(value!.isEmpty){
                           return "please enter your productImg";
@@ -81,6 +105,7 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
 
                   SizedBox(height: 10,),
                   TextFormField(
+                      initialValue: formValues["TotalPrice"],
                       validator: (value) {
                         if(value!.isEmpty){
                           return "please enter your totalPrice";
@@ -93,6 +118,7 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
 
                   SizedBox(height: 10,),
                   TextFormField(
+                      initialValue: formValues["UnitPrice"],
                       validator: (value) {
                         if(value!.isEmpty){
                           return "please enter your unitPrice";
